@@ -1,0 +1,164 @@
+// mount blue codings
+import java.util.*;
+public class Main
+{
+    public int fact(int n)
+    {
+        if(n==0||n==1)
+        {
+            return 1;
+        }
+        else
+        {
+            return n*fact(n-1);   
+        }
+    }
+    
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int a=sc.nextInt();
+		boolean b=true;
+		ArrayList<Integer> set=new ArrayList<Integer>();
+		set.add(a);
+		Main r=new Main();
+		//int res=r.fact(a);
+		//System.out.println(res);
+		while(b)
+		{
+		    int result=0;
+		    if(a>9)
+		    {
+		        int num=a;
+		        while(num>0)
+		        {
+		            int part=num%10;
+		            num=num/10;
+		            int temp=r.fact(part);
+		            result+=temp;
+		        }
+		        a=result;
+		    }
+		    else{
+	            result=r.fact(a);
+	            a=result;
+		    }
+		    if(!set.contains(result))
+		    {
+		        set.add(result);
+		    }
+		    else
+		    {
+		        b=false;
+		    }
+		    
+		}
+		for(int i:set)
+		{
+		    System.out.println(i);
+		}
+		Collections.sort(set)
+		int i=set.size()-1;
+		System.out.println(set.get(i)*10);
+	}
+}
+//2nd coding
+import java.util.*;
+public class Main
+{
+    public int profit(int[] arr)
+    {
+        //System.out.println(Arrays.toString(arr));
+        int count=1;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(i+1==arr.length)
+            {
+                 break;
+            }
+            if(arr[i]<arr[i+1])
+            {
+                count++;
+                continue;
+            }
+            
+        }
+        return count==arr.length?1:0;
+    }
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int no_of_months=sc.nextInt();
+		int[] arr=new int[no_of_months];
+		int k=sc.nextInt();
+		for(int i=0;i<no_of_months;i++)
+		{
+		    arr[i]=sc.nextInt();
+		}
+		int count=0;
+		Main obj= new Main();
+		for(int j=0;j<no_of_months-k+1;j++)
+		{
+		    int[] arr1=new int[k];
+		    for(int m=0;m<k;m++)
+		    {
+		        arr1[m]=arr[m+j];
+		    }
+		    count+=obj.profit(arr1);
+		}
+	System.out.println(count);	
+	}
+}
+//Greedy algorithm codings remaining gold coin
+import java.util.*;
+
+public class Main
+{
+    public static int remgold(int[] arr,int n)
+    {
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        for(int i=0;i<arr.length;i++)
+        {
+            list.add(arr[i]);
+        }
+        System.out.println(list);
+        
+        while(list.size()>0)
+        {
+            if(list.size()==1)
+            {
+                return list.get(0);
+            }
+            Collections.sort(list);
+            if(list.get(list.size()-1)==list.get(list.size()-2))
+            {
+                list.remove(list.size()-1);
+                list.remove(list.size()-1);
+            }
+            else
+            {
+                int temp1=list.get(list.size()-1);
+                int temp2=list.get(list.size()-2);
+                list.remove(list.size()-1);
+                list.remove(list.size()-1);
+                list.add(temp1-temp2);
+                
+            }
+        }
+        return 0;
+        
+    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+        int t= sc.nextInt();
+        while(t-- >0 )
+        {
+            int n = sc.nextInt();
+            int arr[]=new int[n];
+            for(int i=0;i<n;i++)
+            {
+                arr[i] = sc.nextInt();
+            }
+            System.out.println(remgold(arr, n));
+        }
+	}
+}
+
